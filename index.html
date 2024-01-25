@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Etch-a-sketch</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css" /><link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Satisfy&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/52a6a40351.js" crossorigin="anonymous"></script>
+  </head>
+  <body>
+    <main class="main">
+
+      <div id="pad">
+        <p>Etch-a-sketch by Emme Gray</p>
+        <div id="grid-wrapper">
+          <div id="grid" class="grid"></div>
+        </div>
+        <div id="nobs">
+          <div id="rightnob"><button id="clearBtn"><i class="fa-solid fa-trash fa-3x"></i></button></div>
+          <div id="leftnob"><button id="eraserBtn"><i class="fa-solid fa-eraser fa-3x"></i>
+          </button></div>
+
+          <div id="sizeValue" class="size-value">16 x 16</div>
+        <input id="sizeSlider" type="range" value="16" min="1" max="64" />
+
+        </div>
+      </div>
+      
+      <div class="settings">
+        <input id="colorPicker" type="color" value="#333333" />
+        <button id="colorBtn"><i class="fa-solid fa-paintbrush fa-3x"></i></button>
+        <button id="rainbowBtn"><i class="fa-solid fa-rainbow fa-3x" style="color: white;"></i></button>
+      </div>
+      
+    </main>
+    <script src="script.js"></script>
+  </body>
+</html>
