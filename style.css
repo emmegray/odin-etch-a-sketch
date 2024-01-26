@@ -104,6 +104,26 @@ input[type='color']:hover {
   transform: scale(1.05);
 }
 
+#rainbowBtn {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: linear-gradient(
+        90deg,
+        rgba(255, 0, 0, 1) 0%,
+        rgba(255, 154, 0, 1) 10%,
+        rgba(208, 222, 33, 1) 20%,
+        rgba(79, 220, 74, 1) 30%,
+        rgba(63, 218, 216, 1) 40%,
+        rgba(47, 201, 226, 1) 50%,
+        rgba(28, 127, 238, 1) 60%,
+        rgba(95, 21, 242, 1) 70%,
+        rgba(186, 12, 248, 1) 80%,
+        rgba(251, 7, 217, 1) 90%,
+        rgba(255, 0, 0, 1) 100%
+    );
+}
+
 .rainbow-icon {
   text-align: center;
   font-size: 60px;
@@ -287,11 +307,20 @@ input[type='range']::-webkit-slider-thumb {
   }
 
   #pad {
-    width: 430px;
+    width: 365px;
+
+    p {
+      font-size: x-large;
+    }
   }
 
   .grid {
     width: 300px;
     height: 300px;
   }
+
+  #sizeSlider {
+    width: 150px;
+  }
+
 }
