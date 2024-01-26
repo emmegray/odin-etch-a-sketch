@@ -89,6 +89,10 @@ button {
   height: 80px;
 }
 
+.clicked {
+  filter: opacity(0.5);
+}
+
 button,
 input[type='color'] {
   transition: transform 0.1s ease-in-out;
@@ -100,8 +104,9 @@ input[type='color']:hover {
   transform: scale(1.05);
 }
 
-#rainbowBtn {
-  background: linear-gradient(90deg, #FC466B 0%, #3F5EFB 100%);
+.rainbow-icon {
+  text-align: center;
+  font-size: 60px;
 }
 
 input[type='color']:active {
@@ -111,8 +116,8 @@ input[type='color']:active {
 
 input[type='color'] {
   -webkit-appearance: none;
-  width: 80px;
-  height: 80px;
+  width: 60px;
+  height: 60px;
   border: none;
 }
 
@@ -133,6 +138,7 @@ input[type='color']::-webkit-color-swatch {
 input[type='range'] {
   -webkit-appearance: none;
   background-color: var(--primary-light);
+  background-color: transparent;
 }
 
 input[type='range']::-webkit-slider-runnable-track {
@@ -153,7 +159,6 @@ input[type='range']::-webkit-slider-thumb {
 
 .grid {
   display: grid;
-  border-radius: 10px;
   margin: 0 auto;
   width: 500px;
   height: 450px;

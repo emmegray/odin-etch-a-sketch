@@ -22,16 +22,18 @@ function setCurrentSize(newSize) {
 const colorPicker = document.getElementById('colorPicker')
 const colorBtn = document.getElementById('colorBtn')
 const rainbowBtn = document.getElementById('rainbowBtn')
+const gradientBtn = document.getElementById('gradientBtn')
 const eraserBtn = document.getElementById('eraserBtn')
 const clearBtn = document.getElementById('clearBtn')
 const sizeValue = document.getElementById('sizeValue')
 const sizeSlider = document.getElementById('sizeSlider')
 const grid = document.getElementById('grid')
-
 colorPicker.oninput = (e) => setCurrentColor(e.target.value)
 colorBtn.onclick = () => setCurrentMode('color')
 rainbowBtn.onclick = () => setCurrentMode('rainbow')
 eraserBtn.onclick = () => setCurrentMode('eraser')
+gradientBtn.onclick = () => setCurrentMode('gradient')
+
 clearBtn.onclick = () => reloadGrid()
 sizeSlider.onmousemove = (e) => updateSizeValue(e.target.value)
 sizeSlider.onchange = (e) => changeSize(e.target.value)
@@ -83,28 +85,62 @@ function changeColor(e) {
     e.target.style.backgroundColor = currentColor
   } else if (currentMode === 'eraser') {
     e.target.style.backgroundColor = '#fefefe'
+  } else if (currentMode === 'gradient') {
+    let opacity = 0.1;
+    let clickCount = 0;
+    e.target.style.backgroundColor = '#000';
+    e.target.style.opacity = opacity;
+    e.target.addEventListener('mousedown', function() {
+      const interval = setInterval(function() {
+        if (opacity < 1) {
+          opacity += 0.1;
+          e.target.style.opacity = opacity;
+        } else {
+          clearInterval(interval);
+        }
+      }, 1000);
+      clickCount++;
+      if (clickCount % 10 === 0) {
+        opacity = 0.1;
+      }
+});
   }
 }
 
 function activateButton(newMode) {
-  if (currentMode === 'rainbow') {
-    rainbowBtn.classList.remove('active')
-  } else if (currentMode === 'color') {
-    colorBtn.classList.remove('active')
-  } else if (currentMode === 'eraser') {
-    eraserBtn.classList.remove('active')
+  switch (newMode) {
+    case 'rainbow':
+      rainbowBtn.classList.add('active')
+      break
+    case 'color':
+      colorBtn.classList.add('active')
+      break
+    case 'eraser':
+      eraserBtn.classList.add('active')
+    case 'gradient':
+        gradientBtn.classList.add('active')
+      break
+    default:
+      console.error('Invalid mode:', newMode)
   }
+}
 
-  if (newMode === 'rainbow') {
-    rainbowBtn.classList.add('active')
-  } else if (newMode === 'color') {
-    colorBtn.classList.add('active')
-  } else if (newMode === 'eraser') {
-    eraserBtn.classList.add('active')
-  }
+function clickedBtn() {
+  let lastClickedBtn = null;
+  const btn = document.getElementsByTagName("button");
+    for (let i = 0; i < btn.length; i++) {
+      btn[i].addEventListener("click", function() {
+        if (lastClickedBtn !== null) {
+          lastClickedBtn.classList.remove("clicked");
+        }
+        this.classList.toggle("clicked");
+        lastClickedBtn = this;
+      });
+    }
 }
 
 window.onload = () => {
   setupGrid(DEFAULT_SIZE)
   activateButton(DEFAULT_MODE)
+  clickedBtn()
 }
