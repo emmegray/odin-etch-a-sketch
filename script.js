@@ -20,7 +20,7 @@ function setCurrentSize(newSize) {
   currentSize = newSize;
 }
 
-// Button and function
+// Button
 const colorPicker = document.getElementById("colorPicker");
 const colorBtn = document.getElementById("colorBtn");
 const rainbowBtn = document.getElementById("rainbowBtn");
@@ -30,6 +30,8 @@ const clearBtn = document.getElementById("clearBtn");
 const sizeValue = document.getElementById("sizeValue");
 const sizeSlider = document.getElementById("sizeSlider");
 const grid = document.getElementById("grid");
+
+// Functions
 colorPicker.oninput = (e) => setCurrentColor(e.target.value);
 colorBtn.onclick = () => setCurrentMode("color");
 rainbowBtn.onclick = () => setCurrentMode("rainbow");
@@ -89,19 +91,16 @@ function changeColor(e) {
   } else if (currentMode === "eraser") {
     e.target.style.backgroundColor = "#fefefe";
   } else if (currentMode === "gradient") {
-    let opacity = 0.1;
-    e.target.style.backgroundColor = "#000";
-    e.target.style.opacity = opacity;
-    e.target.addEventListener("mousedown", function () {
-      const interval = setInterval(function () {
-        if (opacity < 1) {
-          opacity += 0.1;
-          e.target.style.opacity = opacity;
-        } else {
-          clearInterval(interval);
-        }
-      }, 100);
-    });
+    // Nee to fix it :c
+    let opacity = 0;
+    const interval = setInterval(() => {
+      if (opacity >= 1) {
+        clearInterval(interval);
+      } else {
+        opacity += 0.1;
+        e.target.style.backgroundColor = `rgba(0, 0, 0, ${opacity})`;
+      }
+    }, 100);
   }
 }
 
@@ -115,6 +114,7 @@ function activateButton(newMode) {
       break;
     case "eraser":
       eraserBtn.classList.add("active");
+      break;
     case "gradient":
       gradientBtn.classList.add("active");
       break;
@@ -137,7 +137,7 @@ function clickedBtn() {
   }
 }
 
-// Reload the page here
+// Reload the page
 window.onload = () => {
   setupGrid(DEFAULT_SIZE);
   activateButton(DEFAULT_MODE);
