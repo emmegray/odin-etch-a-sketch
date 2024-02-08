@@ -2,10 +2,13 @@
 const DEFAULT_COLOR = "#333333";
 const DEFAULT_MODE = "color";
 const DEFAULT_SIZE = 16;
+const DEFAULT_OPACITY = 0;
+const container = document.querySelector(".container");
 
 let currentColor = DEFAULT_COLOR;
 let currentMode = DEFAULT_MODE;
 let currentSize = DEFAULT_SIZE;
+let currentOpacity = DEFAULT_OPACITY;
 
 function setCurrentColor(newColor) {
   currentColor = newColor;
@@ -27,6 +30,8 @@ const rainbowBtn = document.getElementById("rainbowBtn");
 const gradientBtn = document.getElementById("gradientBtn");
 const eraserBtn = document.getElementById("eraserBtn");
 const clearBtn = document.getElementById("clearBtn");
+const confirmBtn = document.getElementById("confirmBtnReset");
+const cancelBtn = document.getElementById("cancelBtnReset");
 const sizeValue = document.getElementById("sizeValue");
 const sizeSlider = document.getElementById("sizeSlider");
 const grid = document.getElementById("grid");
@@ -57,8 +62,19 @@ function updateSizeValue(value) {
 }
 
 function reloadGrid() {
-  clearGrid();
-  setupGrid(currentSize);
+  container.style.display = 'block';
+  confirmBtn.classList.remove("clicked");  
+  cancelBtn.classList.remove("clicked");
+
+  confirmBtn.addEventListener("click", () => {
+    clearGrid();
+    setupGrid(currentSize);
+    container.style.display = 'none';
+  });
+
+  cancelBtn.addEventListener("click", () => {
+    container.style.display = 'none';
+  });
 }
 
 function clearGrid() {
@@ -90,36 +106,27 @@ function changeColor(e) {
     e.target.style.backgroundColor = currentColor;
   } else if (currentMode === "eraser") {
     e.target.style.backgroundColor = "#fefefe";
-  } else if (currentMode === "gradient") {
-    // Nee to fix it :c
-    let opacity = 0;
-    const interval = setInterval(() => {
-      if (opacity >= 1) {
-        clearInterval(interval);
-      } else {
-        opacity += 0.1;
-        e.target.style.backgroundColor = `rgba(0, 0, 0, ${opacity})`;
-      }
-    }, 100);
   }
 }
 
+// Shading
+// coming soon
+
 function activateButton(newMode) {
-  switch (newMode) {
-    case "rainbow":
-      rainbowBtn.classList.add("active");
-      break;
-    case "color":
-      colorBtn.classList.add("active");
-      break;
-    case "eraser":
-      eraserBtn.classList.add("active");
-      break;
-    case "gradient":
-      gradientBtn.classList.add("active");
-      break;
-    default:
-      console.error("Invalid mode:", newMode);
+  if (currentMode === "rainbow") {
+    rainbowBtn.classList.remove("active");
+  } else if (currentMode === "color") {
+    colorBtn.classList.remove("active");
+  } else if (currentMode === "eraser") {
+    eraserBtn.classList.remove("active");
+  }
+
+  if (newMode === "rainbow") {
+    rainbowBtn.classList.add("active");
+  } else if (newMode === "color") {
+    colorBtn.classList.add("active");
+  } else if (newMode === "eraser") {
+    eraserBtn.classList.add("active");
   }
 }
 

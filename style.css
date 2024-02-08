@@ -46,6 +46,17 @@ a{
   text-decoration: none;
 }
 
+.layout {
+  width: 100%;
+
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+
+  justify-content: center;
+  align-items: center;
+}
+
 /* HEADER */
 
 .header {
@@ -135,10 +146,11 @@ input[type='color']:active {
 }
 
 input[type='color'] {
-  -webkit-appearance: none;
+  border-radius: 50%;
   width: 60px;
   height: 60px;
   border: none;
+  outline: none;
 }
 
 input[type='color']::-webkit-color-swatch-wrapper {
@@ -187,7 +199,6 @@ input[type='range']::-webkit-slider-thumb {
 }
 
 .grid-element {
-  user-select: none;
   border: 1px dotted beige;
 }
 
@@ -252,7 +263,62 @@ input[type='range']::-webkit-slider-thumb {
 #sizeSlider {
   width: 200px;
 }
-#
+
+.post-it {
+	width:400px;
+  height:300px;
+  position:relative;
+  background:rgb(255, 218, 170);
+  overflow:hidden;
+  margin:30px auto;
+  padding:20px;
+  border-radius: 5px;
+  box-shadow:
+  inset 1px -10px 40px rgba(0,0,0,0.2), inset 0px -3px 10px rgba(0,0,0,0.2), 1px -3px 6px 5px rgba(0,0,0,0.2);
+  font-family: 'Permanent Marker', cursive;
+  line-height:1.7em;
+  font-size:19px;
+  -webkit-mask-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAA5JREFUeNpiYGBgAAgwAAAEAAGbA+oJAAAAAElFTkSuQmCC);
+}
+
+/* Toast */
+.container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #f9f9f9;
+  border: 1px solid #ccc;
+  padding: 20px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  width: 400px;
+  text-align: center;
+  display: none;
+}
+
+.alert-box {
+  font-size: 20px;
+  color: #333;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  button {
+    border-radius: 0;
+    width: 100px;
+    height: 30px;
+    margin: 5px;
+  }
+
+  #confirmBtnReset{
+  background-color: rgb(95, 233, 95);
+  }
+
+  #cancelBtnReset{
+    background-color: #f80012;
+  }
+}
+
 /* FOOTER */
 
 .footer {
@@ -321,6 +387,10 @@ input[type='range']::-webkit-slider-thumb {
 
   #sizeSlider {
     width: 150px;
+  }
+
+  .post-it{
+    width: 300px;
   }
 
 }
