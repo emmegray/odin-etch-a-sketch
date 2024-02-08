@@ -104,6 +104,9 @@ function changeColor(e) {
     e.target.style.backgroundColor = `rgb(${randomR}, ${randomG}, ${randomB})`;
   } else if (currentMode === "color") {
     e.target.style.backgroundColor = currentColor;
+    document.querySelectorAll("i").forEach((i) => {
+      i.style.color = e.target.value;
+    })
   } else if (currentMode === "eraser") {
     e.target.style.backgroundColor = "#fefefe";
   }
