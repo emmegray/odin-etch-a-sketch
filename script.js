@@ -3,12 +3,14 @@ const DEFAULT_COLOR = "#333333";
 const DEFAULT_MODE = "color";
 const DEFAULT_SIZE = 16;
 const DEFAULT_OPACITY = 0;
-const container = document.querySelector(".container");
+const CONTAINER = document.querySelector(".container");
 
 let currentColor = DEFAULT_COLOR;
 let currentMode = DEFAULT_MODE;
 let currentSize = DEFAULT_SIZE;
 let currentOpacity = DEFAULT_OPACITY;
+
+let clickCount = 0;
 
 function setCurrentColor(newColor) {
   currentColor = newColor;
@@ -25,6 +27,7 @@ function setCurrentSize(newSize) {
 
 // Button
 const colorPicker = document.getElementById("colorPicker");
+const bgColorPicker = document.getElementById("bgColorPicker");
 const colorBtn = document.getElementById("colorBtn");
 const rainbowBtn = document.getElementById("rainbowBtn");
 const gradientBtn = document.getElementById("gradientBtn");
@@ -44,6 +47,7 @@ eraserBtn.onclick = () => setCurrentMode("eraser");
 gradientBtn.onclick = () => setCurrentMode("gradient");
 
 clearBtn.onclick = () => reloadGrid();
+
 sizeSlider.onmousemove = (e) => updateSizeValue(e.target.value);
 sizeSlider.onchange = (e) => changeSize(e.target.value);
 
@@ -62,18 +66,18 @@ function updateSizeValue(value) {
 }
 
 function reloadGrid() {
-  container.style.display = 'block';
+  CONTAINER.style.display = 'block';
   confirmBtn.classList.remove("clicked");  
   cancelBtn.classList.remove("clicked");
 
   confirmBtn.addEventListener("click", () => {
     clearGrid();
     setupGrid(currentSize);
-    container.style.display = 'none';
+    CONTAINER.style.display = 'none';
   });
 
   cancelBtn.addEventListener("click", () => {
-    container.style.display = 'none';
+    CONTAINER.style.display = 'none';
   });
 }
 
@@ -97,6 +101,7 @@ function setupGrid(size) {
 // Colors
 function changeColor(e) {
   if (e.type === "mouseover" && !mouseDown) return;
+
   if (currentMode === "rainbow") {
     const randomR = Math.floor(Math.random() * 256);
     const randomG = Math.floor(Math.random() * 256);
@@ -104,35 +109,43 @@ function changeColor(e) {
     e.target.style.backgroundColor = `rgb(${randomR}, ${randomG}, ${randomB})`;
   } else if (currentMode === "color") {
     e.target.style.backgroundColor = currentColor;
-    document.querySelectorAll("i").forEach((i) => {
-      i.style.color = e.target.value;
-    })
-  } else if (currentMode === "eraser") {
+    document.getElementById("iconColorBtn").style.color = currentColor;
+  } else if (currentMode === "gradient") {
+
+        // WIP still not working :c
+
+        // Incrementa il contatore dei click
+        // clickCount++;
+
+        // Calcola il valore di luminosità (da 0 a 255)
+        // const brightness = Math.min(255, Math.floor((clickCount / 100) * 255));
+    
+        // Imposta il colore di sfondo in base alla luminosità
+        // e.target.style.backgroundColor = `rgb(${brightness}, ${brightness}, ${brightness})`;
+        
+      } else if (currentMode === "eraser") {
     e.target.style.backgroundColor = "#fefefe";
   }
 }
 
-// Shading
-// coming soon
+// Change color to Brush Icon when select a color
+document.getElementById("iconColorBtn").style.color = currentColor;
 
 function activateButton(newMode) {
   if (currentMode === "rainbow") {
     rainbowBtn.classList.remove("active");
-  } else if (currentMode === "color") {
-    colorBtn.classList.remove("active");
   } else if (currentMode === "eraser") {
     eraserBtn.classList.remove("active");
   }
 
   if (newMode === "rainbow") {
     rainbowBtn.classList.add("active");
-  } else if (newMode === "color") {
-    colorBtn.classList.add("active");
   } else if (newMode === "eraser") {
     eraserBtn.classList.add("active");
   }
 }
 
+// BTN clicked
 function clickedBtn() {
   let lastClickedBtn = null;
   const btn = document.getElementsByTagName("button");
