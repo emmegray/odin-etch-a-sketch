@@ -206,10 +206,6 @@ input[type='range']::-webkit-slider-thumb {
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 
-.grid-element {
-  border: 1px dotted beige;
-}
-
 #pad{
   margin-top: 20px;
   width: 600px;
@@ -270,6 +266,57 @@ input[type='range']::-webkit-slider-thumb {
 
 #sizeSlider {
   width: 200px;
+}
+
+/* #screenBtn, .screenshot {
+  position: fixed;
+  left: 50%;
+  transform: translate(-50%, -50%);
+} */
+
+.src-preview {
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 100%;
+  opacity: 0;
+  pointer-events: none;
+  background: rgba(0, 0, 0, 0.24);
+  transition: all 0.15s ease;
+}
+
+.src-preview.show {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.src-preview .screenshot {
+  width: 70%;
+  top: 50%;
+  opacity: 0;
+  pointer-events: none;
+  aspect-ratio: 16 / 9;
+  transition: transform 0.15s ease;
+  transform: translate(-50%, -50%) scale(0.9);
+}
+
+.src-preview.show .screenshot{
+  opacity: 1;
+  pointer-events: auto;
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.screenshot #close-btn {
+  position: absolute;
+  right: -25px;
+  color: #fff;
+  cursor: pointer;
+  font-size: 1.1rem;
+}
+
+.screenshot img {
+  width: 100%;
 }
 
 .post-it {

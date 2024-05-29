@@ -132,17 +132,16 @@ function changeColor(e) {
 document.getElementById("iconColorBtn").style.color = currentColor;
 
 function activateButton(newMode) {
-  if (currentMode === "rainbow") {
-    rainbowBtn.classList.remove("active");
-  } else if (currentMode === "eraser") {
-    eraserBtn.classList.remove("active");
-  }
-
-  if (newMode === "rainbow") {
-    rainbowBtn.classList.add("active");
-  } else if (newMode === "eraser") {
-    eraserBtn.classList.add("active");
-  }
+  const modes = ["rainbow", "eraser"];
+  modes.forEach(mode => {
+    const btn = document.querySelector("#" + mode + "Btn");
+    if (currentMode === mode) {
+      btn.classList.remove("active");
+    }
+    if (newMode === mode) {
+      btn.classList.add("active");
+    }
+  });
 }
 
 // BTN clicked
@@ -159,6 +158,40 @@ function clickedBtn() {
     });
   }
 }
+
+// WIP Screenshot
+const screenshotBtn = document.querySelector("#screenBtn");
+screenshotPreview = document.querySelector(".src-preview");
+closeBtn = screenshotPreview.querySelector("#close-btn");
+
+const captureScreen = async () => {
+  try {
+    const stream = await navigator.mediaDevices.getDisplayMedia({ preferCurrentTab: true });
+    const video = document.createElement("video");
+
+    video.addEventListener("loadedmetadata", () => {
+      const canvas = document.createElement("canvas");
+      const ctx = canvas.getContext("2d");
+
+      canvas.width = video.videoWidth;
+      canvas.height = video.videoHeight;
+
+      video.play();
+      ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+      stream.getVideoTracks()[0].stop();
+
+      screenshotPreview.querySelector("img").src = canvas.toDataURL();
+      screenshotPreview.classList.add("show");
+    });
+    video.srcObject = stream;
+  } catch (error) {
+    alert("Failed to capture screenshot, try again");
+  }
+}
+
+closeBtn.addEventListener("click", () => screenshotPreview.classList.toogle("show"));
+screenshotBtn.addEventListener("click", captureScreen);
+// Can't save the image :c
 
 // Reload the page
 window.onload = () => {
