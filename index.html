@@ -11,9 +11,10 @@
     <link href="https://fonts.googleapis.com/css2?family=Satisfy&display=swap" rel="stylesheet" />
     <script src="https://kit.fontawesome.com/52a6a40351.js" crossorigin="anonymous"></script>
     <script src="script.js" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
   </head>
   <body>
-    <main class="main specific">
+    <main class="main specific" id="capture">
 
       <div class="container">
         <div class="alert-box">
@@ -51,14 +52,7 @@
         <button id="clearBtn" title="Clear the canvas" type="button"><i class="fa-solid fa-trash fa-3x"></i></button>
         <button id="rainbowBtn" title="Rainbow Button" type="button"></button>
         <button id="gradientBtn" title="Gradient Button" type="button"><i class="fa-solid fa-circle-half-stroke fa-4x"></i></button>
-        <button id="screenBtn" title="Screenshot Button" type="button" class="screenBtn"><i class="fa-solid fa-camera-retro fa-4x"></i></button>
-      </div>
-
-      <div class="src-preview">
-        <div class="screenshot">
-          <i id="close-btn" class="fa-solid fa-xmark"></i>
-          <img src="" alt="screenshot">
-        </div>
+        <button id="screenBtn" title="Screenshot Button" type="button" class="screenBtn" value="Capture"><i class="fa-solid fa-camera-retro fa-4x"></i></button>
       </div>
 
       <!-- <div class="post-it">
