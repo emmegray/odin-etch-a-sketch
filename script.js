@@ -25,7 +25,7 @@ function setCurrentSize(newSize) {
   currentSize = newSize;
 }
 
-// Button
+// Buttons Slider and Grid
 const colorPicker = document.getElementById("colorPicker");
 const bgColorPicker = document.getElementById("bgColorPicker");
 const colorBtn = document.getElementById("colorBtn");
@@ -110,19 +110,11 @@ function changeColor(e) {
   } else if (currentMode === "color") {
     e.target.style.backgroundColor = currentColor;
     document.getElementById("iconColorBtn").style.color = currentColor;
+    // GRADIENT - Working Process
   } else if (currentMode === "gradient") {
-
-        // WIP still not working :c
-
-        // Incrementa il contatore dei click
-        // clickCount++;
-
-        // Calcola il valore di luminosità (da 0 a 255)
-        // const brightness = Math.min(255, Math.floor((clickCount / 100) * 255));
-    
-        // Imposta il colore di sfondo in base alla luminosità
-        // e.target.style.backgroundColor = `rgb(${brightness}, ${brightness}, ${brightness})`;
-        
+    let opacity = 0;    
+    opacity = Math.min(opacity + 0.5, 1);
+    e.target.style.opacity = 0.5;
       } else if (currentMode === "eraser") {
     e.target.style.backgroundColor = "#fefefe";
   }

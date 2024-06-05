@@ -268,12 +268,6 @@ input[type='range']::-webkit-slider-thumb {
   width: 200px;
 }
 
-/* #screenBtn, .screenshot {
-  position: fixed;
-  left: 50%;
-  transform: translate(-50%, -50%);
-} */
-
 .src-preview {
   position: fixed;
   left: 0;
@@ -368,12 +362,16 @@ input[type='range']::-webkit-slider-thumb {
     margin: 5px;
   }
 
-  #confirmBtnReset {
-  background-color: rgb(95, 233, 95);
+  #alert-box-btn {
+    display: flex;
   }
 
-  #cancelBtnReset {
-    background-color: #f80012;
+  #confirmBtnReset i {
+  color: rgb(95, 233, 95);
+  }
+
+  #cancelBtnReset i {
+    color: #f80012;
   }
 }
 
